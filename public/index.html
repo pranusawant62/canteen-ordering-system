@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusBite — Skip the queue. Grab your bite.</title>
+  <meta name="description" content="A creative, modern, animated college canteen ordering web application. Browse fresh canteen food, order in seconds, and track your food live!" />
+  
+  <!-- Favicon (SVG Fork & Knife) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍴</text></svg>" />
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+
+  <!-- ========================================================
+       Top Navigation Bar
+       ======================================================== -->
+  <header class="site-header" role="banner">
+    <div class="container navbar-inner">
+      <!-- Left: Brand Logo -->
+      <a href="#home" class="brand-logo" onclick="CampusBiteApp.switchView('home'); return false;" aria-label="CampusBite Home">
+        <div class="brand-icon-wrap">
+          <i class="fa-solid fa-utensils"></i>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Campus<span>Bite</span></span>
+          <span class="brand-tagline-sub">College Canteen</span>
+        </div>
+      </a>
+
+      <!-- Center: Navigation Links -->
+      <nav class="nav-container" aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="#home" class="nav-link active" data-view="home" onclick="CampusBiteApp.switchView('home'); return false;">Home</a></li>
+          <li><a href="#menu" class="nav-link" data-view="menu" onclick="CampusBiteApp.switchView('menu'); return false;">Menu</a></li>
+          <li><a href="#orders" class="nav-link" data-view="orders" onclick="CampusBiteApp.switchView('orders'); return false;">Orders</a></li>
+          <li><a href="#about" class="nav-link" data-view="about" onclick="CampusBiteApp.switchView('about'); return false;">About</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right: Live Canteen Pill & Cart Button -->
+      <div class="nav-actions">
+        <div class="canteen-status-badge" title="Canteen Kitchen Status">
+          <span class="status-dot"></span>
+          <span>Open · Counter 1 & 2</span>
+        </div>
+
+        <button class="cart-toggle-btn" onclick="CampusBiteUI.openCartDrawer()" aria-label="View shopping cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span>Cart</span>
+          <span class="cart-badge" id="nav-cart-badge">0</span>
+        </button>
+
+        <button class="mobile-menu-btn" onclick="CampusBiteApp.toggleMobileMenu()" aria-label="Toggle mobile menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-nav-menu" id="mobile-nav-menu">
+    <ul class="mobile-nav-list">
+      <li class="mobile-nav-item">
+        <a href="#home" data-view="home" onclick="CampusBiteApp.switchView('home'); return false;">
+          <i class="fa-solid fa-house"></i> Home
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="#menu" data-view="menu" onclick="CampusBiteApp.switchView('menu'); return false;">
+          <i class="fa-solid fa-utensils"></i> Canteen Menu
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="#orders" data-view="orders" onclick="CampusBiteApp.switchView('orders'); return false;">
+          <i class="fa-solid fa-clock-rotate-left"></i> Track Orders
+        </a>
+      </li>
+      <li class="mobile-nav-item">
+        <a href="#about" data-view="about" onclick="CampusBiteApp.switchView('about'); return false;">
+          <i class="fa-solid fa-circle-info"></i> About & Timings
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ========================================================
+       Main Content Container (SPA Views)
+       ======================================================== -->
+  <main id="main-content">
+
+    <!-- ======================================================
+         VIEW 1: HOME PAGE
+         ====================================================== -->
+    <section id="view-home" class="view-section active animate-fade-in">
+      
+      <!-- Hero Section -->
+      <div class="hero-section">
+        <div class="container hero-grid">
+          
+          <!-- Hero Left Column -->
+          <div class="hero-content">
+            <div class="hero-badge-pill">
+              <i class="fa-solid fa-sparkles"></i> Skip the queue. Grab your bite.
+            </div>
+
+            <h1 class="hero-title">
+              Hungry between lectures?<br />
+              <span class="highlight">Skip the queue.</span> Grab your bite.
+            </h1>
+
+            <p class="hero-description">
+              Order your favorite canteen food before the next lecture and pick it up hot & fresh when it’s ready. Zero waiting in long lines!
+            </p>
+
+            <div class="hero-cta-group">
+              <button class="btn-primary" onclick="CampusBiteApp.switchView('menu')">
+                Order Now <i class="fa-solid fa-burger"></i>
+              </button>
+              <button class="btn-secondary" onclick="CampusBiteApp.switchView('menu')">
+                View Menu <i class="fa-solid fa-arrow-down"></i>
+              </button>
+            </div>
+
+            <div class="hero-stats">
+              <div class="stat-item">
+                <span class="stat-value">⚡ 5–10 min</span>
+                <span class="stat-label">Avg. Prep Time</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">⭐ 4.8 / 5</span>
+                <span class="stat-label">Student Rating</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">₹20</span>
+                <span class="stat-label">Starting Price</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Right Column (Food Visual Composition) -->
+          <div class="hero-visual-wrap">
+            <div class="hero-main-card float-slow">
+              <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="Crispy Cheese Burger" />
+              <div class="hero-main-card-body">
+                <div class="hero-main-card-top">
+                  <h3 class="hero-main-card-title">Cheese Burger</h3>
+                  <span class="hero-main-card-price">₹70</span>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.6rem;">
+                  Loaded cheddar & spiced crispy patty
+                </p>
+                <button class="btn-primary" style="width: 100%; justify-content: center; padding: 0.55rem; font-size: 0.88rem;" onclick="CampusBiteUI.handleAddToCart(event, 1)">
+                  Add to Cart • ₹70
+                </button>
+              </div>
+            </div>
+
+            <!-- Floating Micro Badges -->
+            <div class="floating-badge floating-badge-1 float-reverse">
+              <div class="badge-icon green">
+                <i class="fa-solid fa-check"></i>
+              </div>
+              <div class="badge-meta">
+                <strong>Pranali picked up #CB1021</strong>
+                <span>Counter 2 • Just now</span>
+              </div>
+            </div>
+
+            <div class="floating-badge floating-badge-2 float-slow">
+              <div class="badge-icon amber">
+                <i class="fa-solid fa-fire"></i>
+              </div>
+              <div class="badge-meta">
+                <strong>Today's Special Maggi</strong>
+                <span>Over 340+ ordered today</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Quick Categories -->
+      <div class="categories-section">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Quick Categories</h2>
+              <p class="section-subtitle">What do you feel like having today?</p>
+            </div>
+          </div>
+
+          <div class="categories-bar">
+            <button class="category-chip" onclick="CampusBiteApp.selectCategoryFromHome('Fast Food')">
+              <span>🍔</span> Fast Food
+            </button>
+            <button class="category-chip" onclick="CampusBiteApp.selectCategoryFromHome('Snacks')">
+              <span>🥪</span> Snacks
+            </button>
+            <button class="category-chip" onclick="CampusBiteApp.selectCategoryFromHome('Meals')">
+              <span>🍜</span> Meals
+            </button>
+            <button class="category-chip" onclick="CampusBiteApp.selectCategoryFromHome('Drinks')">
+              <span>🥤</span> Drinks
+            </button>
+            <button class="category-chip" onclick="CampusBiteApp.selectCategoryFromHome('Desserts')">
+              <span>🍰</span> Desserts
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Today's Special Banner -->
+      <div class="special-section">
+        <div class="container" id="today-special-content">
+          <!-- Populated dynamically by app.js -->
+        </div>
+      </div>
+
+      <!-- Popular Today Section -->
+      <section class="popular-section" style="padding: 1rem 0 3.5rem;">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Popular Today 🔥</h2>
+              <p class="section-subtitle">Most ordered canteen items voted by campus students</p>
+            </div>
+            <button class="btn-secondary" onclick="CampusBiteApp.switchView('menu')" style="padding: 0.5rem 1.25rem; font-size: 0.88rem;">
+              View Full Menu <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+
+          <div class="food-grid" id="popular-foods-grid">
+            <!-- Populated dynamically with 4-6 cards -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Why CampusBite? -->
+      <section class="features-section">
+        <div class="container">
+          <div class="section-header" style="text-align: center; margin-bottom: 2.5rem; justify-content: center;">
+            <div>
+              <h2 class="section-title">Why CampusBite? 🎓</h2>
+              <p class="section-subtitle">Engineered specifically to solve real college canteen crowd problems</p>
+            </div>
+          </div>
+
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-icon-wrap">
+                <i class="fa-solid fa-bolt"></i>
+              </div>
+              <h3>Quick Ordering</h3>
+              <p>Place your order from your lecture hall, lab, or campus bench in under 30 seconds.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon-wrap">
+                <i class="fa-regular fa-clock"></i>
+              </div>
+              <h3>Save Time</h3>
+              <p>Say goodbye to 20-minute counter queues between lectures. Walk in only when food is hot & ready.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon-wrap">
+                <i class="fa-solid fa-mobile-screen"></i>
+              </div>
+              <h3>Easy Tracking</h3>
+              <p>Track your food through 5 live stages: Placed, Accepted, Kitchen Prep, Ready, and Picked Up.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon-wrap">
+                <i class="fa-solid fa-wallet"></i>
+              </div>
+              <h3>Student Friendly</h3>
+              <p>Pocket-friendly pricing, clean transparent bills, and student ID-based pickup verification.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </section>
+
+    <!-- ======================================================
+         VIEW 2: CANTEEN MENU PAGE
+         ====================================================== -->
+    <section id="view-menu" class="view-section">
+      <div class="container menu-view-container">
+
+        <!-- Search & Filter Header -->
+        <div class="menu-search-header">
+          <h1 class="menu-search-title">What are you craving? 🍴</h1>
+
+          <!-- Search Input -->
+          <div class="search-input-wrap">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input 
+              type="text" 
+              id="menu-search-input" 
+              placeholder="Search for burger, sandwich, maggi, coffee, biryani..." 
+              autocomplete="off" 
+              aria-label="Search food"
+            />
+            <button class="search-clear-btn" id="menu-search-clear" aria-label="Clear search">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <!-- Controls Row: Category Filter Chips & Sort -->
+          <div class="menu-controls-row">
+            <div class="menu-filter-chips">
+              <button class="filter-chip-btn active" data-category="All" onclick="CampusBiteApp.filterCategory('All')">All</button>
+              <button class="filter-chip-btn" data-category="Fast Food" onclick="CampusBiteApp.filterCategory('Fast Food')">🍔 Fast Food</button>
+              <button class="filter-chip-btn" data-category="Snacks" onclick="CampusBiteApp.filterCategory('Snacks')">🥪 Snacks</button>
+              <button class="filter-chip-btn" data-category="Meals" onclick="CampusBiteApp.filterCategory('Meals')">🍜 Meals</button>
+              <button class="filter-chip-btn" data-category="Drinks" onclick="CampusBiteApp.filterCategory('Drinks')">🥤 Drinks</button>
+              <button class="filter-chip-btn" data-category="Desserts" onclick="CampusBiteApp.filterCategory('Desserts')">🍰 Desserts</button>
+            </div>
+
+            <div class="menu-secondary-controls">
+              <!-- Pure Veg Switch -->
+              <label class="veg-toggle-label">
+                <input type="checkbox" id="veg-only-checkbox" />
+                <span>🟢 Pure Veg Only</span>
+              </label>
+
+              <!-- Sorting Dropdown -->
+              <select class="sort-select" id="menu-sort-select" aria-label="Sort food menu">
+                <option value="popular">Popularity ⭐</option>
+                <option value="price-asc">Price: Low → High</option>
+                <option value="price-desc">Price: High → Low</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Items Count Badge -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem;">
+          <span id="menu-items-count" style="font-size:0.9rem; font-weight:700; color:var(--text-secondary);">Loading items...</span>
+        </div>
+
+        <!-- Food Cards Grid -->
+        <div class="food-grid" id="menu-foods-grid">
+          <!-- Populated dynamically with full catalog -->
+        </div>
+
+        <!-- Empty Search Result State -->
+        <div class="empty-state" id="menu-empty-state" style="display:none;">
+          <div class="empty-state-icon">🔍</div>
+          <h3>No food found</h3>
+          <p>We couldn't find any dishes matching your search. Try searching for something else!</p>
+          <button class="btn-primary" onclick="CampusBiteApp.resetFilters()">
+            Reset Search & Filters
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================
+         VIEW 3: CHECKOUT PAGE
+         ====================================================== -->
+    <section id="view-checkout" class="view-section">
+      <div class="container checkout-view-container">
+        
+        <div class="checkout-card-header" style="margin-bottom: 2rem;">
+          <span style="font-size: 0.85rem; font-weight: 700; color: var(--accent-primary); text-transform: uppercase;">Step 2 of 2</span>
+          <h1 style="font-size: 2.2rem; font-weight: 800; margin-top: 0.25rem;">Almost there! 🍴</h1>
+          <p>Enter your student details and pick your preference to confirm your canteen order.</p>
+        </div>
+
+        <div class="checkout-grid">
+          
+          <!-- Left: Student Details Form -->
+          <div class="checkout-card">
+            <h2 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1.25rem;">Student & Pickup Details</h2>
+            
+            <form id="checkout-form" onsubmit="CampusBiteApp.handleCheckoutSubmit(event)">
+              
+              <div class="form-group-grid">
+                <div class="form-group">
+                  <label for="studentName">Full Name *</label>
+                  <input type="text" id="studentName" name="studentName" placeholder="e.g. Pranali Sawant" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="studentId">Student ID / Roll No. *</label>
+                  <input type="text" id="studentId" name="studentId" placeholder="e.g. CS2023-042" required />
+                </div>
+              </div>
+
+              <div class="form-group-grid">
+                <div class="form-group">
+                  <label for="collegeEmail">College Email *</label>
+                  <input type="email" id="collegeEmail" name="collegeEmail" placeholder="pranali@college.edu" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">Phone Number (10 digits) *</label>
+                  <input type="tel" id="phone" name="phone" placeholder="9876543210" required />
+                </div>
+              </div>
+
+              <div class="form-group-grid">
+                <div class="form-group">
+                  <label for="department">Department *</label>
+                  <select id="department" name="department" required>
+                    <option value="" disabled selected>Select Department</option>
+                    <option value="Computer Engineering">Computer Engineering</option>
+                    <option value="Information Technology">Information Technology</option>
+                    <option value="Electronics & Telecom">Electronics & Telecom</option>
+                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    <option value="Civil Engineering">Civil Engineering</option>
+                    <option value="Management Studies">Management Studies</option>
+                    <option value="Science & Humanities">Science & Humanities</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="year">Year of Study *</label>
+                  <select id="year" name="year" required>
+                    <option value="" disabled selected>Select Year</option>
+                    <option value="1st Year">1st Year (FE)</option>
+                    <option value="2nd Year">2nd Year (SE)</option>
+                    <option value="3rd Year">3rd Year (TE)</option>
+                    <option value="Final Year">Final Year (BE)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Pickup Preference -->
+              <div class="form-group" style="margin-top: 0.5rem;">
+                <label>Pickup Preference *</label>
+                <div class="pickup-radio-group">
+                  <label class="pickup-radio-card active">
+                    <input type="radio" name="pickupPreference" value="As soon as ready" checked />
+                    <div class="pickup-radio-info">
+                      <strong>As soon as ready</strong>
+                      <span>Estimated in 10–15 min</span>
+                    </div>
+                  </label>
+
+                  <label class="pickup-radio-card">
+                    <input type="radio" name="pickupPreference" value="Next break (1:15 PM)" />
+                    <div class="pickup-radio-info">
+                      <strong>Next break (1:15 PM)</strong>
+                      <span>Reserved for lunch time</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Special Cooking Instructions -->
+              <div class="form-group" style="margin-top: 1rem;">
+                <label for="specialInstructions">Special Instructions (Optional)</label>
+                <input type="text" id="specialInstructions" name="specialInstructions" placeholder="e.g. Less spicy, no onions, extra tissue" />
+              </div>
+
+              <button type="submit" class="btn-checkout-proceed" id="btn-place-order" style="margin-top: 1.5rem;">
+                Place Order <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </form>
+          </div>
+
+          <!-- Right: Order Summary Card -->
+          <div class="checkout-card">
+            <h2 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between;">
+              <span>Your Order</span>
+              <button class="btn-secondary" onclick="CampusBiteUI.openCartDrawer()" style="padding: 0.35rem 0.85rem; font-size: 0.78rem;">
+                Edit Cart
+              </button>
+            </h2>
+
+            <div id="checkout-summary-items" style="margin-bottom: 1.25rem;">
+              <!-- Populated dynamically -->
+            </div>
+
+            <div style="border-top: 1px solid var(--border-light); padding-top: 1rem;">
+              <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="checkout-subtotal">₹0</span>
+              </div>
+              <div class="summary-row">
+                <span>Canteen GST & Tax (5%)</span>
+                <span id="checkout-tax">₹0</span>
+              </div>
+              <div class="summary-row total-row">
+                <span>Total Amount</span>
+                <span id="checkout-total">₹0</span>
+              </div>
+            </div>
+
+            <div style="background: var(--bg-surface-subtle); padding: 0.85rem 1rem; border-radius: var(--radius-sm); margin-top: 1.25rem; font-size: 0.82rem; color: var(--text-secondary);">
+              <i class="fa-solid fa-shield-halved" style="color: var(--color-success); margin-right: 0.4rem;"></i>
+              Pay securely at canteen counter using UPI or student ID card when collecting your food.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================
+         VIEW 4: ORDERS & STATUS TRACKING PAGE
+         ====================================================== -->
+    <section id="view-orders" class="view-section">
+      <div class="container orders-view-container">
+
+        <div class="section-header" style="margin-bottom: 2rem;">
+          <div>
+            <h1 class="section-title">Your Orders 📱</h1>
+            <p class="section-subtitle">Real-time canteen kitchen status tracker and previous order receipts</p>
+          </div>
+        </div>
+
+        <!-- Active Order 5-Stage Live Status Tracker -->
+        <div id="active-order-tracking">
+          <!-- Populated dynamically by UI.renderOrderTracking() -->
+        </div>
+
+        <!-- Order History List -->
+        <div style="margin-top: 3.5rem;">
+          <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1.25rem;">Previous Orders</h2>
+          <div class="history-grid" id="order-history-list">
+            <!-- Populated dynamically by UI.renderOrderHistory() -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================
+         VIEW 5: ABOUT PAGE
+         ====================================================== -->
+    <section id="view-about" class="view-section">
+      <div class="container" style="padding: 3rem 0 4rem; max-width: 860px;">
+        <div class="checkout-card">
+          <div style="text-align: center; margin-bottom: 2rem;">
+            <div class="brand-icon-wrap" style="width: 56px; height: 56px; margin: 0 auto 1rem; font-size: 1.6rem;">
+              <i class="fa-solid fa-utensils"></i>
+            </div>
+            <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem;">About CampusBite</h1>
+            <p style="font-size: 1.1rem; color: var(--accent-primary); font-weight: 700;">
+              “Skip the queue. Grab your bite.”
+            </p>
+          </div>
+
+          <div style="font-size: 1rem; color: var(--text-secondary); line-height: 1.8;">
+            <p style="margin-bottom: 1.25rem;">
+              <strong>CampusBite</strong> was created to address one of the most common everyday frustrations of college students: spending 15 to 20 minutes standing in packed canteen queues during short 10-minute lecture breaks.
+            </p>
+
+            <p style="margin-bottom: 1.5rem;">
+              With CampusBite, students can browse the daily freshly prepared canteen menu, customize their order, submit their roll number, and monitor real-time kitchen preparation status right from their smartphone. When your food is hot and packed, simply walk to the pickup counter and present your order number.
+            </p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; background: var(--bg-main); padding: 1.5rem; border-radius: var(--radius-md);">
+              <div>
+                <h4 style="color: var(--text-primary); margin-bottom: 0.5rem; font-weight: 800;">📍 Campus Canteen Counter</h4>
+                <p style="font-size: 0.9rem;">Ground Floor, Student Activity Center (SAC Building), Campus Main Square.</p>
+              </div>
+              <div>
+                <h4 style="color: var(--text-primary); margin-bottom: 0.5rem; font-weight: 800;">🕒 Operating Hours</h4>
+                <p style="font-size: 0.9rem;">Monday to Saturday: 8:00 AM – 5:30 PM (Kitchen closes at 5:00 PM).</p>
+              </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+              <button class="btn-primary" onclick="CampusBiteApp.switchView('menu')">
+                Explore Canteen Menu Now 🍔
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================
+       Slide-Over Cart Drawer
+       ======================================================== -->
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay" onclick="CampusBiteUI.closeCartDrawer()">
+    <div class="cart-drawer-panel" onclick="event.stopPropagation()">
+      <div class="drawer-header">
+        <h3 class="drawer-title">
+          <span>Your Cart 🛒</span>
+          <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: 600;" id="drawer-item-count">(0 items)</span>
+        </h3>
+        <button class="drawer-close-btn" onclick="CampusBiteUI.closeCartDrawer()" aria-label="Close cart">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="drawer-body">
+        <div class="cart-items-list" id="drawer-cart-items">
+          <!-- Populated dynamically -->
+        </div>
+
+        <div class="cart-notes-wrap">
+          <label for="cart-special-instructions"><i class="fa-regular fa-comment-dots"></i> Cooking Instructions</label>
+          <input type="text" id="cart-special-instructions" placeholder="e.g. Less spicy, no onions, extra chutney" />
+        </div>
+      </div>
+
+      <div class="drawer-footer">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="drawer-subtotal">₹0</span>
+        </div>
+        <div class="summary-row">
+          <span>Canteen Tax (5%)</span>
+          <span id="drawer-tax">₹0</span>
+        </div>
+        <div class="summary-row total-row">
+          <span>Total Amount</span>
+          <span id="drawer-total">₹0</span>
+        </div>
+
+        <button class="btn-checkout-proceed" id="btn-drawer-checkout" onclick="CampusBiteApp.switchView('checkout'); CampusBiteUI.closeCartDrawer();">
+          Proceed to Checkout <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       Order Confirmation Modal
+       ======================================================== -->
+  <div class="modal-overlay" id="confirmation-modal-overlay">
+    <div class="modal-card">
+      
+      <!-- Animated SVG Checkmark -->
+      <div class="success-checkmark">
+        <svg class="checkmark-wrapper" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+          <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
+          <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+        </svg>
+      </div>
+
+      <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--text-primary); margin-bottom: 0.25rem;">
+        Order Confirmed!
+      </h2>
+
+      <div class="order-conf-number-badge" id="conf-order-number">
+        #CB1024
+      </div>
+
+      <p id="conf-greeting" style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">
+        Hi Pranali 👋
+      </p>
+
+      <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.25rem;">
+        Your order has been received by the kitchen.<br />Please collect it at Counter 2 when ready.
+      </p>
+
+      <div style="background: var(--bg-main); padding: 0.75rem 1rem; border-radius: var(--radius-sm); margin-bottom: 1.75rem; font-size: 0.88rem;">
+        <strong>Estimated preparation time:</strong> <span id="conf-prep-time">10–15 minutes</span>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; justify-content: center;">
+        <button class="btn-primary" onclick="CampusBiteUI.closeOrderConfirmation(); CampusBiteApp.switchView('orders');">
+          Track Order <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <button class="btn-secondary" onclick="CampusBiteUI.closeOrderConfirmation(); CampusBiteApp.switchView('menu');">
+          Back to Menu
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================
+       Food Item Quick Details Modal
+       ======================================================== -->
+  <div class="modal-overlay" id="food-modal-overlay" onclick="CampusBiteUI.closeFoodDetails()">
+    <div class="modal-card" id="food-modal-content" style="padding:0; max-width:440px; overflow:hidden;" onclick="event.stopPropagation()">
+      <!-- Populated dynamically -->
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- ========================================================
+       Footer
+       ======================================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>🍴 CampusBite</h3>
+          <p>“Skip the queue. Grab your bite.”</p>
+          <p style="margin-top: 0.75rem; font-size: 0.85rem; color: #8C8177;">
+            Designed specifically for college campus students and canteen staff to eliminate long food counter queues.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Navigation</h4>
+          <ul>
+            <li><a href="#home" onclick="CampusBiteApp.switchView('home'); return false;">Home</a></li>
+            <li><a href="#menu" onclick="CampusBiteApp.switchView('menu'); return false;">Canteen Menu</a></li>
+            <li><a href="#orders" onclick="CampusBiteApp.switchView('orders'); return false;">Track Orders</a></li>
+            <li><a href="#about" onclick="CampusBiteApp.switchView('about'); return false;">About & Timings</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Canteen Hours</h4>
+          <ul>
+            <li><span style="color:#fff;">Mon – Fri:</span> 8:00 AM – 5:30 PM</li>
+            <li><span style="color:#fff;">Saturday:</span> 8:30 AM – 3:00 PM</li>
+            <li><span style="color:#e03131;">Sunday:</span> Closed</li>
+            <li><span style="color:#fab005;">Counter:</span> SAC Ground Floor</li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Student Support</h4>
+          <ul>
+            <li><i class="fa-solid fa-phone" style="margin-right: 0.4rem;"></i> Canteen Help: Ext. 402</li>
+            <li><i class="fa-solid fa-envelope" style="margin-right: 0.4rem;"></i> canteen@college.edu</li>
+            <li><i class="fa-solid fa-shield-halved" style="margin-right: 0.4rem;"></i> Verified Campus Kitchen</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 CampusBite. All rights reserved.</span>
+        <span>Made for campus life ❤️</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

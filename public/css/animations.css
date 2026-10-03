@@ -1,0 +1,263 @@
+/* ========================================================
+   CampusBite - Modern Animations & Transitions
+   Tasteful, subtle, college-friendly micro-interactions
+   ======================================================== */
+
+/* Page Load Fade & Slide In */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Floating Food Hero Elements */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1.5deg);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(8px) rotate(-1.5deg);
+  }
+}
+
+.float-slow {
+  animation: floatSlow 4.5s ease-in-out infinite;
+}
+
+.float-reverse {
+  animation: floatReverse 5s ease-in-out infinite;
+}
+
+/* Cart Badge Pop / Bounce */
+@keyframes cartBounce {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.4); }
+  65% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+.cart-bounce {
+  animation: cartBounce 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Add Button Success Feedback */
+@keyframes buttonSuccess {
+  0% { transform: scale(0.96); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+.btn-added {
+  animation: buttonSuccess 0.3s ease-out;
+  background-color: #2b8a3e !important;
+  color: #ffffff !important;
+  border-color: #2b8a3e !important;
+}
+
+/* Checkmark Stroke Animation for Order Confirmation */
+@keyframes checkmarkCircle {
+  0% {
+    stroke-dashoffset: 166;
+    stroke: #e8590c;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    stroke: #2b8a3e;
+  }
+}
+
+@keyframes checkmarkCheck {
+  0% {
+    stroke-dashoffset: 48;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes checkmarkScale {
+  0%, 100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+
+.success-checkmark {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.25rem;
+}
+
+.checkmark-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 3;
+  stroke-miterlimit: 10;
+  stroke: #2b8a3e;
+  fill: none;
+  animation: checkmarkCircle 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark-check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #2b8a3e;
+  fill: none;
+  animation: checkmarkCheck 0.35s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards;
+}
+
+.checkmark-wrapper {
+  border-radius: 50%;
+  display: block;
+  stroke-width: 3;
+  stroke: #fff;
+  box-shadow: inset 0px 0px 0px #2b8a3e;
+  animation: checkmarkScale 0.3s ease-in-out 0.8s both;
+}
+
+/* Pulse Glow for Preparing State */
+@keyframes pulseIndicator {
+  0% {
+    box-shadow: 0 0 0 0 rgba(232, 89, 12, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(232, 89, 12, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(232, 89, 12, 0);
+  }
+}
+
+.pulse-active {
+  animation: pulseIndicator 1.8s infinite;
+}
+
+/* Toast Notifications */
+@keyframes toastSlideIn {
+  from {
+    transform: translateX(110%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toastSlideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(110%);
+    opacity: 0;
+  }
+}
+
+.toast-enter {
+  animation: toastSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.toast-exit {
+  animation: toastSlideOut 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Food Card Hover & Transitions */
+.food-card {
+  transition: transform 0.28s cubic-bezier(0.2, 0, 0, 1),
+              box-shadow 0.28s cubic-bezier(0.2, 0, 0, 1),
+              border-color 0.28s ease;
+}
+
+.food-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px -6px rgba(45, 30, 15, 0.12);
+  border-color: rgba(232, 89, 12, 0.25);
+}
+
+.food-card .card-img-wrap img {
+  transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.food-card:hover .card-img-wrap img {
+  transform: scale(1.06);
+}
+
+/* Category Button Hover */
+.category-btn {
+  transition: all 0.22s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.category-btn:hover {
+  transform: translateY(-2px);
+}
+
+.category-btn:active {
+  transform: scale(0.97);
+}
+
+/* Quantity Button Press Effect */
+.qty-btn {
+  transition: all 0.15s ease;
+}
+
+.qty-btn:active {
+  transform: scale(0.88);
+}
+
+/* Shimmer Loading Effect */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, #f0ece6 25%, #fbf9f6 50%, #f0ece6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Smooth Drawer Slide */
+.drawer-backdrop {
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.drawer-panel {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Empty State Floating Icon */
+@keyframes gentleWiggle {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  25% { transform: rotate(-4deg) translateY(-4px); }
+  75% { transform: rotate(4deg) translateY(4px); }
+}
+
+.empty-icon-wiggle {
+  animation: gentleWiggle 3.5s ease-in-out infinite;
+}
