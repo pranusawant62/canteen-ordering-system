@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/server.js",
     "dev": "node --watch server/server.js",
-    "test": "node --test tests/**/*.test.js",
+    "test": "node --test tests/*.test.js",
     "build": "node -e \"console.log('Build completed successfully: Assets verified.')\""
   },
   "keywords": [
@@ -27,3 +27,4 @@
     "supertest": "^7.0.0"
   }
 }
+
